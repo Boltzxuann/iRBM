@@ -57,6 +57,7 @@ class LearningRate:
             for k, v in state['lr'].items():
                 self.lr[k] = v
 
+                
         # Make sure each learning rate have the right dtype
         self.lr = CustomDict({k: theano.shared(v.get_value().astype(config.floatX), name='lr_' + k) for k, v in self.lr.items()})
 
@@ -65,7 +66,8 @@ class ConstantLearningRate(LearningRate):
     def __init__(self, lr):
         LearningRate.__init__(self, lr)
 
-    def __call__(self, gradients):
+
+        def __call__(self, gradients):
         return self.lr, OrderedDict()
 
     def get_lr(self, param):
@@ -94,6 +96,9 @@ class ADAGRAD(LearningRate):
 
         self.epsilon = eps
         self.parameters = []
+        
+        
+    #  I   will add ADADELTA here!
 
     def __call__(self, grads):
         updates = OrderedDict()
