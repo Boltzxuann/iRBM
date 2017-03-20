@@ -75,7 +75,10 @@ class ConstantLearningRate(LearningRate):
 
 
 class ADAGRAD(LearningRate):
-    def __init__(self, lr, eps=1e-6):
+    def __init__(self, lr, eps=1e-12):
+        
+        # The influence of eps should be as small as possible, so I set eps  = 1e-12 here. -- PX, 20/3/2017
+        
         """
         Implements the ADAGRAD learning rule.
 
@@ -97,8 +100,15 @@ class ADAGRAD(LearningRate):
         self.epsilon = eps
         self.parameters = []
         
-        
-    #  I   will add ADADELTA here!
+       
+    
+    
+    
+    #  I   will add ADADELTA here! ADADELTA converges fast but too early. There should be a way to fix it, 
+    #  and I am working on that. --PX, 20/3/2017
+    
+    
+    
 
     def __call__(self, grads):
         updates = OrderedDict()
